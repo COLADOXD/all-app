@@ -4,35 +4,53 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        Poppins: ["Overpass", "sans-serif"],
+        Josefin: ["Josefin Sans", "sans-serif"],
       },
       textColor: (theme) => ({
         ...theme("colors"),
 
-        primary: "#3172eb",
+        primary: "hsl(0, 0%, 98%)",
 
-        secondary: "#8f94a2",
+        secondary: "hsl(236, 33%, 92%)",
 
-        terceary: "hsl(216, 12%, 54%)",
+        terceary: "hsl(236, 9%, 61%)",
 
-        cuarto: "#1b212d",
+        cuarto: "hsl(235, 19%, 35%)",
 
-        quinto: "rgba(20,21,25,255)",
+        quinto: "hsl(235, 21%, 11%)",
       }),
       backgroundColor: (theme) => ({
         ...theme("colors"),
 
-        primary: "#151c2e",
+        primary: "hsl(0, 0%, 98%)",
 
-        secondary: "#212a46",
+        secondary: "hsl(236, 33%, 92%)",
 
-        terceary: "#3477f5",
+        terceary: "hsl(236, 9%, 61%)",
 
-        cuarto: "#8f94a2",
+        cuarto: "hsl(235, 19%, 35%)",
 
-        quinto: "rgba(20,21,25,255)",
+        quinto: "hsl(235, 21%, 11%)",
       }),
     },
   },
   plugins: [],
 };
+
+// ### Light Theme
+
+// - Very Light Gray: hsl(0, 0%, 98%)
+// - Very Light Grayish Blue: hsl(236, 33%, 92%)
+// - Light Grayish Blue: hsl(233, 11%, 84%)
+// - Dark Grayish Blue: hsl(236, 9%, 61%)
+// - Very Dark Grayish Blue: hsl(235, 19%, 35%)
+
+// ### Dark Theme
+
+// - Very Dark Blue: hsl(235, 21%, 11%)
+// - Very Dark Desaturated Blue: hsl(235, 24%, 19%)
+// - Light Grayish Blue: hsl(234, 39%, 85%)
+// - Light Grayish Blue (hover): hsl(236, 33%, 92%)
+// - Dark Grayish Blue: hsl(234, 11%, 52%)
+// - Very Dark Grayish Blue: hsl(233, 14%, 35%)
+// - Very Dark Grayish Blue: hsl(237, 14%, 26%)
