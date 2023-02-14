@@ -1,8 +1,16 @@
 <script setup>
 import ToddleList from "../components/ToddleList.vue"
-import Light from "../assets/icon-sun.svg"
+import Light from "../assets/icon-moon.svg"
+import { reactive, ref } from "vue";
 
-const list = ['datos', 'falsos', 'nuevos']
+const state = reactive({
+    valor: '',
+})
+
+const lists = ref([])
+const handleSubmit = () => {
+    lists.value.push(state.valor);
+}
 </script>
 
 <template>
@@ -13,14 +21,13 @@ const list = ['datos', 'falsos', 'nuevos']
                 <img class="h-[48px] w-[48px]" :src="Light" alt="">
             </div>
             <div class="flex flex-row bg-octavo items-center text-terceary text-3xl px-10 py-8 rounded-lg mt-10 mb-24">
-                <form @submit.prevent="agregarNombre">
-                    <input class="mr-4" type="submit">
-                    <input class="bg-octavo" type="text" placeholder="Create a new todo..." />
-                </form>
-
+                <input class="mr-4" type="checkbox">
+                <input type="text" v-on:keyup.enter="handleSubmit" placeholder="Create a new todo..."
+                    v-model="state.valor"
+                    class="bg-transparent border-none w-full appearance-none leading-tight focus:outline-none" />
             </div>
         </div>
-        <ToddleList :mi-list="list" />
+        <ToddleList :lists="lists" />
     </section>
 
 </template>

@@ -1,28 +1,33 @@
 <script setup>
 import Cross from "../assets/icon-cross.svg"
 
+
 const props = defineProps({
-    list: {
+    lists: {
         type: Array,
         required: true
     }
 })
-console.log(props.list)
+
+// listLength = props.lists.length
+console.log(props.lists.length)
 </script>
 
 <template>
     <div class="px-10 bottom-20">
         <div class="flex relative bottom-[90px] flex-col bg-octavo text-terceary text-3xl rounded-lg my-10">
-            <div class="flex flex-row px-10 py-8 justify-between" v-for="item in props.list" :key="item">
-                <div class="flex flex-row">
-                    <input class="mr-4" type="checkbox">
-                    <p>{{ item }}</p>
+            <div v-for="list in props.lists" :key="list">
+                <div class="flex flex-row px-10 py-8 justify-between">
+                    <div class="flex flex-row">
+                        <input class="mr-4" type="checkbox">
+                        <p>{{ list }}</p>
+                    </div>
+                    <img class="p-1" :src="Cross" alt="">
                 </div>
-                <img class="p-1" :src="Cross" alt="">
+                <div class="h-px w-full bg-sexto "></div>
             </div>
-            <div class="h-px w-full bg-sexto "></div>
             <div class="flex flex-row px-10 py-8 justify-between">
-                <p>5 items Left</p>
+                <p>{{ props.lists.length }} items Left</p>
                 <p>Clear Completed</p>
             </div>
         </div>
