@@ -9,6 +9,10 @@ const props = defineProps({
     }
 })
 
+const clear = (indice) => {
+    props.lists.splice(indice, 1)
+}
+
 // listLength = props.lists.length
 console.log(props.lists.length)
 </script>
@@ -16,13 +20,13 @@ console.log(props.lists.length)
 <template>
     <div class="px-10 bottom-20">
         <div class="flex relative bottom-[90px] flex-col bg-octavo text-terceary text-3xl rounded-lg my-10">
-            <div v-for="list in props.lists" :key="list">
+            <div v-for="(list, indice) in props.lists" :key="list">
                 <div class="flex flex-row px-10 py-8 justify-between">
                     <div class="flex flex-row">
                         <input class="mr-4" type="checkbox">
                         <p>{{ list }}</p>
                     </div>
-                    <img class="p-1" :src="Cross" alt="">
+                    <img v-on:click="clear(indice)" class="p-1" :src="Cross" alt="">
                 </div>
                 <div class="h-px w-full bg-sexto "></div>
             </div>
