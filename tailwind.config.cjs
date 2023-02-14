@@ -18,6 +18,8 @@ module.exports = {
         cuarto: "hsl(235, 19%, 35%)",
 
         quinto: "hsl(235, 21%, 11%)",
+
+        sexto: "hsl(237, 14%, 26%)",
       }),
       backgroundColor: (theme) => ({
         ...theme("colors"),
@@ -31,7 +33,15 @@ module.exports = {
         cuarto: "hsl(235, 19%, 35%)",
 
         quinto: "hsl(235, 21%, 11%)",
+
+        sexto: "hsl(237, 14%, 26%)",
+
+        septimo: "hsl(220, 98%, 61%)",
+        octavo: "hsl(235, 24%, 19%)",
       }),
+      backgroundImage: {
+        bgMoviles: "url('~@/assets/bg-mobile-dark.jpg')",
+      },
     },
   },
   plugins: [],
