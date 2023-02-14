@@ -1,23 +1,22 @@
 <script setup>
 import Cross from "../assets/icon-cross.svg"
 
-// defineProps({
-//     list: {
-//         type: Array,
-//         required: true
-//     }
-// })
-// console.log(list[1])
-const names = ['mateo', 'hola']
+const props = defineProps({
+    list: {
+        type: Array,
+        required: true
+    }
+})
+console.log(props.list)
 </script>
 
 <template>
     <div class="px-10 bottom-20">
         <div class="flex relative bottom-[90px] flex-col bg-octavo text-terceary text-3xl rounded-lg my-10">
-            <div class="flex flex-row px-10 py-8 justify-between" v-for="name in names" :key="name">
+            <div class="flex flex-row px-10 py-8 justify-between" v-for="item in props.list" :key="item">
                 <div class="flex flex-row">
                     <input class="mr-4" type="checkbox">
-                    <p>{{ name }}</p>
+                    <p>{{ item }}</p>
                 </div>
                 <img class="p-1" :src="Cross" alt="">
             </div>
