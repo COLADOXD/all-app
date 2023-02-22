@@ -1,6 +1,6 @@
 <script setup>
 import Cross from "../assets/icon-cross.svg"
-
+import { defineEmits } from "vue";
 
 const props = defineProps({
     lists: {
@@ -9,22 +9,31 @@ const props = defineProps({
     }
 })
 
+const emit = defineEmits(['todoChanged'])
+
 const clear = (indice) => {
     props.lists.splice(indice, 1)
 }
 
-// listLength = props.lists.length
-console.log(props.lists.length)
+const clearAll = () => {
+    props.lists.splice(0, props.lists.length)
+
+}
+
+const changeBolean = (event) => {
+    const todoId = event;
+    emit('todoChanged', todoId)
+}
 </script>
 
 <template>
     <div class="px-10 bottom-20">
-        <div class="flex relative bottom-[90px] flex-col bg-octavo text-terceary text-3xl rounded-lg my-10">
+        <div class="flex relative bottom-[110px] flex-col bg-octavo text-terceary text-3xl rounded-lg my-10">
             <div v-for="(list, indice) in props.lists" :key="list">
                 <div class="flex flex-row px-10 py-8 justify-between">
                     <div class="flex flex-row">
-                        <input class="mr-4" type="checkbox">
-                        <p>{{ list }}</p>
+                        <input class="mr-4" type="checkbox" :checked="list.isCompleted" v-on:click="changeBolean(indice)">
+                        <p>{{ list.mensage }} {{ list.isCompleted }}</p>
                     </div>
                     <img v-on:click="clear(indice)" class="p-1" :src="Cross" alt="">
                 </div>
@@ -32,7 +41,7 @@ console.log(props.lists.length)
             </div>
             <div class="flex flex-row px-10 py-8 justify-between">
                 <p>{{ props.lists.length }} items Left</p>
-                <p>Clear Completed</p>
+                <p v-on:click="clearAll">Clear Completed</p>
             </div>
         </div>
         <div
