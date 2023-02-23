@@ -22,8 +22,10 @@ const handleSubmit = () => {
 }
 
 const handleTodoChanged = (paylod) => {
+    console.log(paylod)
     const object = lists.value[paylod]
     object.isCompleted = !object.isCompleted;
+    console.log(!object.isCompleted)
 };
 </script>
 

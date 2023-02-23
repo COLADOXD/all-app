@@ -11,19 +11,19 @@ const props = defineProps({
 
 const emit = defineEmits(['todoChanged'])
 
+const changeBolean = (event) => {
+    const todoId = event;
+    emit('todoChanged', todoId)
+}
+
 const clear = (indice) => {
     props.lists.splice(indice, 1)
 }
 
 const clearAll = () => {
     props.lists.splice(0, props.lists.length)
-
 }
 
-const changeBolean = (event) => {
-    const todoId = event;
-    emit('todoChanged', todoId)
-}
 </script>
 
 <template>
