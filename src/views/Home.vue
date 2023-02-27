@@ -5,21 +5,21 @@ import { reactive, ref } from "vue";
 
 const valor = ref('')
 
-const lists = ref([
+const todoList = ref([
     {
-        mensage: 'sadas',
+        message: 'sadas',
         isCompleted: false,
         id: 0
     }
 ])
 const handleSubmit = () => {
-    lists.value.push({ mensage: valor.value, isCompleted: false, });
+    todoList.value.push({ message: valor.value, isCompleted: false, });
     valor.value = '';
 }
 
-const handleTodoChanged = (paylod) => {
-    const object = lists.value[paylod]
-    object.isCompleted = !object.isCompleted;
+const handleTodoChanged = (todoIndex) => {
+    const todoItem = todoList.value[todoIndex]
+    todoItem.isCompleted = !todoItem.isCompleted;
 };
 
 </script>
@@ -37,6 +37,6 @@ const handleTodoChanged = (paylod) => {
                     class="bg-transparent border-none w-full appearance-none leading-tight focus:outline-none" />
             </div>
         </div>
-        <ToddleList :lists="lists" @todo-changed="handleTodoChanged" />
+        <ToddleList :todoList="todoList" @todo-changed="handleTodoChanged" />
     </section>
 </template>
