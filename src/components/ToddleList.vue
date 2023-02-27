@@ -9,6 +9,8 @@ const props = defineProps({
     }
 })
 
+let display = ref([]);
+let showitem = ref(false);
 const emit = defineEmits(['todoChanged'])
 
 const changeBolean = (event) => {
@@ -24,29 +26,45 @@ const clearAll = () => {
     props.lists.splice(0, props.lists.length)
 }
 
-const filtered = ref({})
-
 const displaySelecet = () => {
-    filtered.push = props.lists.filter(list => list.isCompleted === true)
-    console.log(filtered)
+    showitem.value = !showitem.value;
+    display.value.push(...props.lists.filter(item => item.isCompleted === true))
+    if (!showitem.value) {
+        display.value = []
+    }
 }
-
-
 </script>
 
 <template>
     <div class="px-10 bottom-20">
         <div class="flex relative bottom-[110px] flex-col bg-octavo text-terceary text-3xl rounded-lg my-10">
-            <div v-for="(list, indice) in props.lists" :key="list">
-                <div class="flex flex-row px-10 py-8 justify-between">
-                    <div class="flex flex-row">
-                        <input class="mr-4" type="checkbox" :checked="list.isCompleted" v-on:click="changeBolean(indice)">
-                        <p>{{ list.mensage }} {{ list.isCompleted }}</p>
+            <div v-if="showitem">
+                <div v-for="(list, indice) in display" :key="list">
+                    <div class="flex flex-row px-10 py-8 justify-between">
+                        <div class="flex flex-row">
+                            <input class="mr-4" type="checkbox" :checked="list.isCompleted"
+                                v-on:click="changeBolean(indice)">
+                            <p>{{ list.mensage }} {{ list.isCompleted }}</p>
+                        </div>
+                        <img v-on:click="clear(indice)" class="p-1" :src="Cross" alt="">
                     </div>
-                    <img v-on:click="clear(indice)" class="p-1" :src="Cross" alt="">
+                    <div class="h-px w-full bg-sexto "></div>
                 </div>
-                <div class="h-px w-full bg-sexto "></div>
             </div>
+            <div v-else>
+                <div v-for="(list, indice) in props.lists" :key="list">
+                    <div class="flex flex-row px-10 py-8 justify-between">
+                        <div class="flex flex-row">
+                            <input class="mr-4" type="checkbox" :checked="list.isCompleted"
+                                v-on:click="changeBolean(indice)">
+                            <p>{{ list.mensage }} {{ list.isCompleted }}</p>
+                        </div>
+                        <img v-on:click="clear(indice)" class="p-1" :src="Cross" alt="">
+                    </div>
+                    <div class="h-px w-full bg-sexto "></div>
+                </div>
+            </div>
+
             <div class="flex flex-row px-10 py-8 justify-between">
                 <p>{{ props.lists.length }} items Left</p>
                 <p v-on:click="clearAll">Clear Completed</p>
