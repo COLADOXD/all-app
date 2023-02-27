@@ -1,6 +1,6 @@
 <script setup>
 import Cross from "../assets/icon-cross.svg"
-import { defineEmits } from "vue";
+import { defineEmits, ref } from "vue";
 
 const props = defineProps({
     lists: {
@@ -23,6 +23,14 @@ const clear = (indice) => {
 const clearAll = () => {
     props.lists.splice(0, props.lists.length)
 }
+
+const filtered = ref({})
+
+const displaySelecet = () => {
+    filtered.push = props.lists.filter(list => list.isCompleted === true)
+    console.log(filtered)
+}
+
 
 </script>
 
@@ -47,7 +55,7 @@ const clearAll = () => {
         <div
             class="flex flex-row relative bottom-[90px] bg-octavo text-terceary text-3xl px-10 py-8 rounded-lg justify-center">
             <p class="mx-3">All</p>
-            <p class="mx-3">Active</p>
+            <p @click="displaySelecet" class="mx-3">Active</p>
             <p class="mx-3">Complete</p>
         </div>
         <p class="text-center text-terceary text-3xl">Drag and drop to reorder list</p>

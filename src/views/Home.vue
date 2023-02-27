@@ -5,10 +5,6 @@ import { reactive, ref } from "vue";
 
 const valor = ref('')
 
-// list
-// [  { texto: string,  isCompleted: bool   }  ]
-//
-
 const lists = ref([
     {
         mensage: 'sadas',
@@ -25,7 +21,7 @@ const handleTodoChanged = (paylod) => {
     console.log(paylod)
     const object = lists.value[paylod]
     object.isCompleted = !object.isCompleted;
-    console.log(!object.isCompleted)
+    console.log(object.isCompleted)
 };
 </script>
 
