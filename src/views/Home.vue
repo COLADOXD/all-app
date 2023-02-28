@@ -5,34 +5,7 @@ import { reactive, ref } from "vue";
 
 const valor = ref('')
 
-const todoList = ref([
-    {
-        message: '1',
-        isCompleted: false,
-        id: 0
-    },
-    {
-        message: '2',
-        isCompleted: false,
-        id: 0
-    },
-    {
-        message: '3',
-        isCompleted: true,
-        id: 0
-    },
-    {
-        message: '4',
-        isCompleted: true,
-        id: 0
-    },
-    {
-        message: '5',
-        isCompleted: false,
-        id: 0
-    },
-
-])
+const todoList = ref([])
 const handleSubmit = () => {
     todoList.value.push({ message: valor.value, isCompleted: false });
     valor.value = '';
@@ -44,9 +17,6 @@ const handleTodoChanged = (todoIndex) => {
 };
 
 const handleTodoDeleted = (todoIndex) => {
-    // const todoItem = todoList.value[todoIndex]
-    // todoItem.isCompleted = !todoItem.isCompleted;
-    // todoIndex.value.revemo
     todoList.value.splice(todoIndex, 1);
 };
 

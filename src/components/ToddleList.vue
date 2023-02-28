@@ -18,8 +18,7 @@ const activeTodos = computed(() => {
                 parentIndex: index
             };
         })
-            .
-            filter(item => item.isCompleted === true)
+            .filter(item => item.isCompleted === true)
     ]
 });
 let shouldShowActive = ref(false);
@@ -46,25 +45,6 @@ const clear = (index) => {
     } else {
         deleteTodo(index);
     }
-    // props.todoList.push = [...props.todoList.map((todoItem, index) => {
-    //     return {
-    //         message: todoItem.message,
-    //         isCompleted: todoItem.isCompleted,
-    //         id: index
-    //     };
-    // })]
-    // if (shouldShowActive.value) {
-    //     const activeTodoToDelete = activeTodos.value[index]
-    //     const indexToDelete = activeTodoToDelete.parentIndex;
-    //     props.todoList.splice(indexToDelete, 1)
-    //     // console.log(props.todoList.splice(index, 1))
-    // } else {
-    //     activeTodos.value.splice(index, 1)
-    //     // const todoIndex = props.todoList.filter(todoItem => todoItem.parentIndex !== index)
-    //     // console.log(activeTodos[index].parentIndex)
-    //     console.log(todoIndex)
-    //     console.log(activeTodos.value)
-    // }
 }
 
 const clearAll = () => {
@@ -73,28 +53,6 @@ const clearAll = () => {
 
 const onShowActive = () => {
     shouldShowActive.value = !shouldShowActive.value;
-    // [
-    //   { iscompleted: true, message }   
-    // ]
-
-    /// { message: "", isCompleted: true, parentIndex: 2}
-    // activeTodos.value = [
-    //     // todo Item: { iscompleted: true, message }   
-    //     ...props.todoList.map((todoItem, index) => {
-    //         return {
-    //             message: todoItem.message,
-    //             isCompleted: todoItem.isCompleted,
-    //             parentIndex: index
-    //         };
-    //     })
-    //         .
-    //         filter(item => item.isCompleted === true)
-    // ]
-    // (...props.todoList.filter(item => item.isCompleted === true))
-    // if (!shouldShowActive.value) {
-    //     activeTodos.value = []
-    // }
-    // console.log(activeTodos.value)
 }
 </script>
 
