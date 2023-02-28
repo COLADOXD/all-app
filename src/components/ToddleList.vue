@@ -1,6 +1,6 @@
 <script setup>
 import Cross from "../assets/icon-cross.svg"
-import { defineEmits, ref } from "vue";
+import { defineEmits, ref, computed } from "vue";
 
 const props = defineProps({
     todoList: {
@@ -9,17 +9,62 @@ const props = defineProps({
     }
 })
 
-let activeTodos = ref([]);
+const activeTodos = computed(() => {
+    return [
+        ...props.todoList.map((todoItem, index) => {
+            return {
+                message: todoItem.message,
+                isCompleted: todoItem.isCompleted,
+                parentIndex: index
+            };
+        })
+            .
+            filter(item => item.isCompleted === true)
+    ]
+});
 let shouldShowActive = ref(false);
-const emit = defineEmits(['todoChanged'])
+const emit = defineEmits(['todoChanged', 'todoDeleted'])
 
 const changeBolean = (event) => {
     const todoId = event;
     emit('todoChanged', todoId)
 }
 
+const deleteTodo = (todoIndex) => {
+    emit('todoDeleted', todoIndex)
+}
+
 const clear = (index) => {
-    props.todoList.splice(index, 1)
+    console.log(`on Clear: ${index}`)
+    console.log(`on Clear: ${shouldShowActive.value}`)
+
+    if (shouldShowActive.value) {
+        const activeTodo = activeTodos.value[index]
+        const activeTodoIndex = activeTodo.parentIndex
+        deleteTodo(activeTodoIndex)
+
+    } else {
+        deleteTodo(index);
+    }
+    // props.todoList.push = [...props.todoList.map((todoItem, index) => {
+    //     return {
+    //         message: todoItem.message,
+    //         isCompleted: todoItem.isCompleted,
+    //         id: index
+    //     };
+    // })]
+    // if (shouldShowActive.value) {
+    //     const activeTodoToDelete = activeTodos.value[index]
+    //     const indexToDelete = activeTodoToDelete.parentIndex;
+    //     props.todoList.splice(indexToDelete, 1)
+    //     // console.log(props.todoList.splice(index, 1))
+    // } else {
+    //     activeTodos.value.splice(index, 1)
+    //     // const todoIndex = props.todoList.filter(todoItem => todoItem.parentIndex !== index)
+    //     // console.log(activeTodos[index].parentIndex)
+    //     console.log(todoIndex)
+    //     console.log(activeTodos.value)
+    // }
 }
 
 const clearAll = () => {
@@ -28,10 +73,28 @@ const clearAll = () => {
 
 const onShowActive = () => {
     shouldShowActive.value = !shouldShowActive.value;
-    activeTodos.value.push(...props.todoList.filter(item => item.isCompleted === true))
-    if (!shouldShowActive.value) {
-        activeTodos.value = []
-    }
+    // [
+    //   { iscompleted: true, message }   
+    // ]
+
+    /// { message: "", isCompleted: true, parentIndex: 2}
+    // activeTodos.value = [
+    //     // todo Item: { iscompleted: true, message }   
+    //     ...props.todoList.map((todoItem, index) => {
+    //         return {
+    //             message: todoItem.message,
+    //             isCompleted: todoItem.isCompleted,
+    //             parentIndex: index
+    //         };
+    //     })
+    //         .
+    //         filter(item => item.isCompleted === true)
+    // ]
+    // (...props.todoList.filter(item => item.isCompleted === true))
+    // if (!shouldShowActive.value) {
+    //     activeTodos.value = []
+    // }
+    // console.log(activeTodos.value)
 }
 </script>
 
