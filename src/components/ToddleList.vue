@@ -22,7 +22,7 @@ const activeTodos = computed(() => {
     ]
 });
 let shouldShowActive = ref(false);
-const emit = defineEmits(['todoChanged', 'todoDeleted'])
+const emit = defineEmits(['todoChanged', 'todoDeleted', 'todoTrue', 'todoClear'])
 
 const changeBolean = (event) => {
     const todoId = event;
@@ -47,12 +47,21 @@ const clear = (index) => {
     }
 }
 
-const clearAll = () => {
-    props.todoList.splice(0, props.todoList.length)
+const onClearComplete = () => {
+    // props.todoList.splice(0, props.todoList.length)
+    emit('todoClear')
 }
 
 const onShowActive = () => {
     shouldShowActive.value = !shouldShowActive.value;
+}
+
+const onShowAll = () => {
+    shouldShowActive.value = false;
+}
+
+const onComplete = () => {
+    emit('todoTrue', true);
 }
 </script>
 
@@ -88,14 +97,14 @@ const onShowActive = () => {
 
             <div class="flex flex-row px-10 py-8 justify-between">
                 <p>{{ props.todoList.length }} items Left</p>
-                <p v-on:click="clearAll">Clear Completed</p>
+                <p v-on:click="onClearComplete">Clear Completed</p>
             </div>
         </div>
         <div
             class="flex flex-row relative bottom-[90px] bg-octavo text-terceary text-3xl px-10 py-8 rounded-lg justify-center">
-            <p class="mx-3">All</p>
+            <p @click="onShowAll" class="mx-3">All</p>
             <p @click="onShowActive" class="mx-3">Active</p>
-            <p class="mx-3">Complete</p>
+            <p @click="onComplete" class="mx-3">Complete</p>
         </div>
         <p class="text-center text-terceary text-3xl">Drag and drop to reorder list</p>
     </div>

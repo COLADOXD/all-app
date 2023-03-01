@@ -5,7 +5,34 @@ import { reactive, ref } from "vue";
 
 const valor = ref('')
 
-const todoList = ref([])
+const todoList = ref([
+    {
+        message: '1',
+        isCompleted: false,
+        id: 0
+    },
+    {
+        message: '2',
+        isCompleted: false,
+        id: 0
+    },
+    {
+        message: '3',
+        isCompleted: true,
+        id: 0
+    },
+    {
+        message: '4',
+        isCompleted: true,
+        id: 0
+    },
+    {
+        message: '5',
+        isCompleted: false,
+        id: 0
+    },
+
+])
 const handleSubmit = () => {
     todoList.value.push({ message: valor.value, isCompleted: false });
     valor.value = '';
@@ -20,10 +47,19 @@ const handleTodoDeleted = (todoIndex) => {
     todoList.value.splice(todoIndex, 1);
 };
 
+const handleTodoTrue = (todoIsCompleted) => {
+    // todoList.isCompleted = todoIsCompleted;
+    todoList.value = todoList.value.map(obj => ({ ...obj, isCompleted: todoIsCompleted }));
+}
+
+const handleTodoClear = () => {
+    todoList.value = todoList.value.filter(item => item.isCompleted !== true);
+}
+
 </script>
 
 <template>
-    <section class="flex flex-col pb-20 text-white">
+    <section class="flex flex-col pb-20 text-white bg-quinto">
         <div class="bg-[url('./assets/bg-mobile-dark.jpg')] bg-no-repeat bg-cover flex flex-col pt-10 px-10">
             <div class="flex flex-row justify-between my-10">
                 <p class="font-bold text-5xl tracking-widest">T O D O</p>
@@ -35,6 +71,7 @@ const handleTodoDeleted = (todoIndex) => {
                     class="bg-transparent border-none w-full appearance-none leading-tight focus:outline-none" />
             </div>
         </div>
-        <ToddleList :todoList="todoList" @todo-changed="handleTodoChanged" @todo-deleted="handleTodoDeleted" />
+        <ToddleList :todoList="todoList" @todo-changed="handleTodoChanged" @todo-deleted="handleTodoDeleted"
+            @todo-true="handleTodoTrue" @todo-clear="handleTodoClear" />
     </section>
 </template>
